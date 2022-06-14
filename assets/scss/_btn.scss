@@ -1,0 +1,53 @@
+.btn {
+  max-height: 48px;
+  padding: 10px 24px;
+  font-size: 16px;
+  line-height: 20px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 4px;
+
+    &.btn-light {
+      background: $white;
+      border: 1px solid $border-color;
+        span {
+          color: $light-gray-color;
+        }
+        &:hover {
+          background: $primary-color;
+          color: $white;
+          border-color: $primary-color;
+            span {
+              color: $white;
+            }
+        }
+    }
+
+    &.btn-lg {
+      padding: 15px 57px;
+      border-radius: 41px;
+      font-size: 14px;
+      line-height: 15px;
+    }
+
+}
+
+  .btn-primary {
+    background: $primary-color;
+    color: $white;
+    border: none;
+  }
+
+.show-more {
+  max-height: none;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-radius: 12px;
+
+    &:hover {
+      color: $white;
+      background: $primary-color;
+      border-color: $primary-color;
+    }
+
+}

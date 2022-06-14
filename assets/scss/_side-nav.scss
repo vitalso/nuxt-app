@@ -1,0 +1,24 @@
+.side-nav {
+  font-size: 13px;
+
+  svg {
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+  }
+
+  li {
+    margin-bottom: 7px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+  }
+
+  a {
+    padding: 0;
+    color: $dark;
+      &:hover {
+        color: $primary-color;
+      }
+  }
+}

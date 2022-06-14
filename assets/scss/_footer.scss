@@ -1,0 +1,38 @@
+footer {
+  margin-top: 50px;
+
+  .social-link {
+    svg , img {
+      width: 37px;
+      height: 37px;
+    }
+  }
+
+}
+
+  .footer-app {
+    padding: 50px 0;
+    background: $dark-secondary;
+    color: $primary-color;
+  }
+
+  .working-hours {
+    svg {
+      width: 17px;
+      height: 17px;
+    }
+  }
+
+  .copyright {
+    font-size: 13px;
+    color: $border-color;
+    text-align: right;
+  }
+
+@media screen and (max-width: $mobile) {
+
+  .copyright {
+    text-align: center;
+  }
+
+}

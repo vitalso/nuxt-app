@@ -1,0 +1,38 @@
+// Variable
+$white: #fff;
+$dark: #000;
+$dark-secondary: #2D2323;
+$default-text-color: $dark;
+
+$primary-color: #FF833D;
+$red-color: #F84147;
+$light-gray-color: #727272;
+
+$bg: #F5F5F5;
+
+$border-color: #A6A5A5;
+$border-secondary: #C4C4C4;
+$product-border-color: #B1B1B1;
+$hr-color: #DADADA;
+$bg-green: #23584F;
+$bg-brown: #974141;
+
+$link-color: #3E77AA;
+
+$rating-default: #E1E1E1;
+
+// Font variable
+$font-normal: 400;
+$font-medium: 500;
+$font-semibold: 600;
+
+// Responsive points
+$custom-container-width: 1560px;
+$tablet: 992px;
+$mobile: 768px;
+$extra-small: 576px;
+$small: 480px;
+
+.bg-primary {
+  background: $primary-color !important;
+}

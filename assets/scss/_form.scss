@@ -1,0 +1,156 @@
+.left-side-form {
+  width: 100%;
+  max-width: 340px;
+  margin-right: 30px;
+  position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 90%;
+      top: 5%;
+      right: -32px;
+      background: rgba($border-color , .3);
+    }
+
+}
+
+.right-side-form {
+  margin-left: 30px;
+  position: relative;
+
+    .btn {
+      color: $link-color;
+      svg {
+        max-width: 32px;
+        height: 32px;
+      }
+      &:nth-child(2) {
+        svg {
+          max-height: 22px;
+          width: 12px;
+        }
+      }
+    }
+
+    &:after {
+      content: "або";
+      position: absolute;
+      background: $bg;
+      top: 50%;
+      left: -42px;
+      padding: 5px 0;
+      color: rgba($border-color , .5);
+      transform: translateY(-50%);
+    }
+
+}
+
+.login-form {
+
+  .form-row {
+    position: relative;
+  }
+
+  a {
+    text-decoration: none;
+    color: $link-color;
+  }
+
+  input {
+    width: 100%;
+    height: 40px;
+    padding-left: 15px;
+    border-radius: 20px;
+    background: $white;
+    font-size: 14px;
+    color: rgba($dark, .7);
+    border: 1px solid rgba($dark-secondary , .2);
+
+      &::placeholder {
+        color: rgba($dark, .7);
+      }
+
+      & + svg {
+        display: none;
+      }
+
+  }
+
+  label {
+    cursor: pointer;
+  }
+
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    opacity: 0;
+
+      & + span {
+        width: 18px;
+        height: 18px;
+        margin-right: 10px;
+        display: inline-block;
+        border-radius: 50%;
+        background-color: $white;
+        border: 1px solid $primary-color;
+      }
+
+  }
+
+  input[type="checkbox"]:checked {
+    & + span {
+      background-color: $primary-color;
+      background-image: url(../images/icon-checkbox.svg);
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    background: $primary-color;
+    color: $white;
+    text-align: center;
+    height: 48px;
+    border-radius: 30px;
+  }
+
+  input.error-label {
+    border-color: $primary-color;
+  }
+
+  .error-label {
+    color: $primary-color;
+    font-size: 11px;
+    padding-left: 10px;
+
+      & + svg {
+        width: 21px;
+        height: 21px;
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        display: block;
+
+          & + .form-show-password {
+            right: 50px;
+          }
+
+      }
+
+  }
+
+}
+
+.form-show-password {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
