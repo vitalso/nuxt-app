@@ -303,36 +303,35 @@ export default {
   layout: 'custom',
 
   data() {
-      return {
-          catalogs: [],
-          categories: [],
-          baseURL: "https://rozetka-web.azurewebsites.net"
-      }
+    return {
+      catalogs: [],     // it contains the products which will be displayed on the main page
+      categories: [],   // contains all the categories in the left sidebar
+      baseURL: "https://rozetka-web.azurewebsites.net"  //base url for loading images
+    }
   },
 
   methods: {
     async getCategories() {
       const response = await fetch('https://rozetka-web.azurewebsites.net/api/v1/portals')
       const formatedResponse = await response.json()
-      console.log("forma: ", formatedResponse)
       this.categories = formatedResponse.values
     },
     async getCatalogs() {
       const response = await fetch('https://rozetka-web.azurewebsites.net/api/v1/products')
       const formatedResponse = await response.json()
-      // this.catalogs = formatedResponse.values
 
+      // before displaying a catalog/product, call the api to get image_url
       formatedResponse.values.forEach(async (element) => {
         let url = await this.getProductImageUrl(element.productId)
         element.image_url = url
-        this.catalogs.push(element)
+        this.catalogs.push(element)   // push products to "catalogs" array only after they have image_url
       });
     },
     async getProductImageUrl(productId) {
+      // this function gets the image related to a product
       const response = await fetch(`https://rozetka-web.azurewebsites.net/api/v1/products/{productId}/images/`)
       const formatedResponse = await response.json()
       const images = formatedResponse.values
-      console.log("images: ",productId, images)
       // loop throgh all the images and get the first image whose productId matches
       for(let i = 0; i < images.length; i++){
         if(images[i].productId === productId) return this.baseURL + images[i].url
