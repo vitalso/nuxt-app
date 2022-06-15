@@ -4,98 +4,28 @@
   <!-- Content start-->
   <div class="container">
 
-    <ul>
+    <!-- <ul>
         <li
             v-for="catalog in catalogs"
             :key="catalog.portalId"
         >
-            <!--<nuxt-link :to="`users/${catalog.portalId}`">-->
               {{ catalog }}
-            <!--</nuxt-link>-->
         </li>
-    </ul>
+    </ul> -->
 
     <div class="row">
       <!-- Left side bar-->
       <div class="col-lg-3 col-md-3 d-none d-lg-block">
         <div class="card card-box mb-3">
           <ul class="nav flex-column side-nav">
-            <li class="nav-item"><a class="nav-link" href="category.html">
+            <li v-for="(category, index) in categories" :key="category.portalId" class="nav-item">
+              <a class="nav-link" href="category.html">
                 <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-1"></use>
-                </svg><span>Ноутбуки та комп'ютери</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-2"></use>
-                </svg><span>Смартфони, ТВ та електроніка</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-3"></use>
-                </svg><span>Товари для геймерів</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-4"></use>
-                </svg><span>Побутова техніка</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-5"></use>
-                </svg><span>Товари для дому</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-6"></use>
-                </svg><span>Інструменти та автотовари</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-7"></use>
-                </svg><span>Сантехніка та ремонт</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-8"></use>
-                </svg><span>Дача, сад та город</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-9"></use>
-                </svg><span>Спорт та захоплення</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-10"></use>
-                </svg><span>Одяг, взуття та прикраси</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-11"></use>
-                </svg><span>Краса і здоров'я</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-12"></use>
-                </svg><span>Дитячі товари</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-13"></use>
-                </svg><span>Зоотовари</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-14"></use>
-                </svg><span>Канцтовари та книги</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-15"></use>
-                </svg><span>Алкогольні напої та продукти</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-16"></use>
-                </svg><span>Товари для бізнесу та послуги</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-17"></use>
-                </svg><span>Тури та відпочинок</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-18"></use>
-                </svg><span>Акції</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                <svg>
-                  <use xlink:href="../assets/images/sprite.svg#nav-icon-19"></use>
-                </svg><span>Тотальний розпродаж</span></a></li>
+                  <use :xlink:href="require('@/assets/images/sprite.svg') + `#nav-icon-${index+1}`"></use>
+                </svg>
+                <span>{{ category.title }}</span>
+              </a>
+            </li>
           </ul>
         </div>
         <div class="card card-box mb-3">
@@ -397,14 +327,26 @@ export default {
 
   data() {
       return {
-          catalogs: []
+          catalogs: [],
+          categories: []
       }
+  },
+
+  methods: {
+    async getCategories() {
+      const response = await fetch('https://rozetka-web.azurewebsites.net/api/v1/portals')
+      const formatedResponse = await response.json()
+      console.log("forma: ", formatedResponse)
+      this.categories = formatedResponse.values
+    }
   },
 
   async created () {
       const response = await fetch('https://rozetka-web.azurewebsites.net/api/v1/products')
       //const response = await fetch('https://jsonplaceholder.typicode.com/users')
       this.catalogs = await response.json()
+
+      this.getCategories()
   }
 
 }
