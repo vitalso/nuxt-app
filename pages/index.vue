@@ -236,44 +236,21 @@
         <div class="mt-5">
           <h4>Рекомендації на основі ваших переглядів</h4>
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-6">
-              <div class="card product-item add-height mb-2"><a class="add-to-favorite" href="#">
+            <div v-for="catalog in catalogs" :key="catalog.productId" class="col-lg-3 col-md-6 col-6">
+              <div class="card product-item add-height mb-2">
+                <a class="add-to-favorite" href="#">
                   <svg>
                     <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
-                  </svg></a><a href="#">
-                  <div class="product-img"><img src="../assets/images/product-10.png" alt="product-image"></div><span>Фен ROWENTA CV9820 Ultimate Experience</span></a>
-                <p class="text-decoration-line-through price-before mb-2">9 499 ₴</p>
-                <p class="current-price mb-0">6 999 ₴</p>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6">
-              <div class="card product-item add-height mb-2"><a class="add-to-favorite" href="#">
-                  <svg>
-                    <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
-                  </svg></a><a href="#">
-                  <div class="product-img"><img src="../assets/images/product-11.png" alt="product-image"></div><span>Фен Philips серії 3000 BHD350/10</span></a>
-                <p class="text-decoration-line-through price-before mb-2">&#8203;</p>
-                <p class="current-price mb-0">799 ₴</p>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6 d-none d-md-block">
-              <div class="card product-item add-height mb-2"><a class="add-to-favorite" href="#">
-                  <svg>
-                    <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
-                  </svg></a><a href="#">
-                  <div class="product-img"><img src="../assets/images/product-12.png" alt="product-image"></div><span>Фен PHILIPS DryCare BHD274/00 ACmotor</span></a>
-                <p class="text-decoration-line-through price-before mb-2">1 594 ₴</p>
-                <p class="current-price mb-0">1 494 ₴</p>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6 d-none d-md-block">
-              <div class="card product-item add-height mb-2"><a class="add-to-favorite" href="#">
-                  <svg>
-                    <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
-                  </svg></a><a href="#">
-                  <div class="product-img"><img src="../assets/images/product-13.png" alt="product-image"></div><span>Фен PHILIPS 5000 series BHD530/00</span></a>
-                <p class="text-decoration-line-through price-before mb-2">&#8203;</p>
-                <p class="current-price mb-0">1 799 ₴</p>
+                  </svg>
+                </a>
+                <a href="#">
+                  <div class="product-img">
+                    <img :src="catalog.image_url" :alt="catalog.label">
+                  </div>
+                  <span>{{ catalog.title }}</span>
+                </a>
+                <p class="text-decoration-line-through price-before mb-2" v-if="catalog.price_before">{{ catalog.price_before }} ₴</p>
+                <p class="current-price mb-0">{{ catalog.price }} ₴</p>
               </div>
             </div>
             <div class="col-12 d-block d-md-none"><a class="btn card text-decoration-none show-more font-size-13" href="#">Показати ще</a></div>
@@ -328,7 +305,8 @@ export default {
   data() {
       return {
           catalogs: [],
-          categories: []
+          categories: [],
+          baseURL: "https://rozetka-web.azurewebsites.net"
       }
   },
 
@@ -338,15 +316,34 @@ export default {
       const formatedResponse = await response.json()
       console.log("forma: ", formatedResponse)
       this.categories = formatedResponse.values
+    },
+    async getCatalogs() {
+      const response = await fetch('https://rozetka-web.azurewebsites.net/api/v1/products')
+      const formatedResponse = await response.json()
+      // this.catalogs = formatedResponse.values
+
+      formatedResponse.values.forEach(async (element) => {
+        let url = await this.getProductImageUrl(element.productId)
+        element.image_url = url
+        this.catalogs.push(element)
+      });
+    },
+    async getProductImageUrl(productId) {
+      const response = await fetch(`https://rozetka-web.azurewebsites.net/api/v1/products/{productId}/images/`)
+      const formatedResponse = await response.json()
+      const images = formatedResponse.values
+      console.log("images: ",productId, images)
+      // loop throgh all the images and get the first image whose productId matches
+      for(let i = 0; i < images.length; i++){
+        if(images[i].productId === productId) return this.baseURL + images[i].url
+      }
+      return null
     }
   },
 
   async created () {
-      const response = await fetch('https://rozetka-web.azurewebsites.net/api/v1/products')
-      //const response = await fetch('https://jsonplaceholder.typicode.com/users')
-      this.catalogs = await response.json()
-
-      this.getCategories()
+    this.getCategories()
+    this.getCatalogs()
   }
 
 }
