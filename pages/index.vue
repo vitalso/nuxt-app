@@ -281,7 +281,7 @@ export default {
       promotionalOffers: {
         largeProduct: {},
         normalProducts: []
-      },
+      },  // products in "promotional section"
       baseURL: "https://rozetka-web.azurewebsites.net"  //base url for loading images
     }
   },
@@ -304,11 +304,16 @@ export default {
 
         // as there are not many products in database, duplicate the products in anticipatedGoods section
         if (index === 0){
+          // there is one large product in "anticipated goods" and "promotional offers" section
+          // only first product from the api will be the large product in both the sections
           this.anticipatedGoods.largeProduct = element
           this.promotionalOffers.largeProduct = element
         }
         else{
+          // all the products except first product will be the normal products in both "anticipated goods" and "promotional offers" section
           this.anticipatedGoods.normalProducts.push(element)
+
+          // as "promotional offers" section has 4 normal sized products, so, we are pushing same product twice, to make 4 products in total
           this.promotionalOffers.normalProducts.push(element)
           this.promotionalOffers.normalProducts.push(element)
         }
