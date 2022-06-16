@@ -111,55 +111,25 @@
           <h4>Акційні пропозиції</h4><a class="btn btn-light btn-lg ml-auto d-none d-sm-block" href="#">Всі акції <span>1036</span></a>
         </div>
         <div class="row">
-          <div class="col-lg-6 col-md-12 mb-2">
+          <div class="col-lg-6 col-md-12 mb-2" v-if="Object.keys(promotionalOffers.largeProduct).length">
             <div class="card product-item large-product"><a class="add-to-favorite" href="#">
                 <svg>
                   <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
-                </svg></a><a href="#"><img src="../assets/images/product-1.png" alt="product-image"><span>Ноутбук ASUS VivoBook S14 S435EA-HM020 (90NB0SU1-M00330) Deep Green</span></a>
-              <p class="text-decoration-line-through price-before">33 999 ₴</p>
-              <p class="current-price mb-0">30 999 ₴</p>
+                </svg></a><a href="#"><img :src="promotionalOffers.largeProduct.image_url" :alt="promotionalOffers.largeProduct.label"><span>{{ promotionalOffers.largeProduct.title }}</span></a>
+              <p class="text-decoration-line-through price-before" v-if="promotionalOffers.largeProduct.before_price">{{ promotionalOffers.largeProduct.before_price }} ₴</p>
+              <p class="current-price mb-0">{{ promotionalOffers.largeProduct.price }} ₴</p>
             </div>
           </div>
           <div class="col-lg-6 ps-lg-1 pe-lg-3">
             <div class="row index-action" data-masonry="{&quot;percentPosition&quot;: true }">
-              <div class="col-lg-6 col-sm-6 col-6">
+              <div class="col-lg-6 col-sm-6 col-6" v-for="(product, index) in promotionalOffers.normalProducts" :key="index">
                 <div class="card product-item add-height mb-2"><a class="add-to-favorite" href="#">
                     <svg>
                       <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
                     </svg></a><a href="#">
-                    <div class="product-img"><img src="../assets/images/product-2.png" alt="product-image"></div><span>Віскі Chivas Regal 1 л 12 років витримки 40% в подарунковій упаковці</span></a>
-                  <p class="text-decoration-line-through price-before mb-2">1670 ₴</p>
-                  <p class="current-price mb-0">1049 ₴</p>
-                </div>
-              </div>
-              <div class="col-lg-6 col-sm-6 col-6">
-                <div class="card product-item mb-2"><a class="add-to-favorite" href="#">
-                    <svg>
-                      <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
-                    </svg></a><a href="#">
-                    <div class="product-img"><img src="../assets/images/product-3.png" alt="product-image"></div><span>Ігрова консоль Microsoft Xbox Series X 1TB (RRT-00010)</span></a>
-                  <p class="text-decoration-line-through price-before mb-2">22 745 ₴</p>
-                  <p class="current-price mb-0">22 195 ₴</p>
-                </div>
-              </div>
-              <div class="col-lg-6 col-sm-6 col-6 d-none d-md-block">
-                <div class="card product-item mb-2"><a class="add-to-favorite" href="#">
-                    <svg>
-                      <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
-                    </svg></a><a href="#">
-                    <div class="product-img"><img src="../assets/images/product-5.png" alt="product-image"></div><span>Електросамокат Xiaomi Mi Electric Scooter 1S Black</span></a>
-                  <p class="text-decoration-line-through price-before mb-2">13 999 ₴</p>
-                  <p class="current-price mb-0">11 999 ₴</p>
-                </div>
-              </div>
-              <div class="col-lg-6 col-sm-6 col-6 d-none d-md-block">
-                <div class="card product-item add-height mb-2"><a class="add-to-favorite" href="#">
-                    <svg>
-                      <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
-                    </svg></a><a href="#">
-                    <div class="product-img"><img src="../assets/images/product-4.png" alt="product-image"></div><span>Мобільний телефон Apple iPhone 12 mini 128 GB White Офіційна гарантія</span></a>
-                  <p class="text-decoration-line-through price-before mb-2">23 999 ₴</p>
-                  <p class="current-price mb-0">21 999 ₴</p>
+                    <div class="product-img"><img :src="product.image_url" :alt="product.label"></div><span>{{ product.title }}</span></a>
+                  <p class="text-decoration-line-through price-before mb-2" v-if="product.before_price">{{ product.before_price }} ₴</p>
+                  <p class="current-price mb-0">{{ product.price }} ₴</p>
                 </div>
               </div>
               <div class="col-lg-6"><a class="btn card text-decoration-none show-more font-size-13" href="#">Показати ще</a></div>
@@ -308,6 +278,10 @@ export default {
         largeProduct: {},
         normalProducts: []
       },  // goods in "the most anticipated goods" section
+      promotionalOffers: {
+        largeProduct: {},
+        normalProducts: []
+      },
       baseURL: "https://rozetka-web.azurewebsites.net"  //base url for loading images
     }
   },
@@ -331,9 +305,12 @@ export default {
         // as there are not many products in database, duplicate the products in anticipatedGoods section
         if (index === 0){
           this.anticipatedGoods.largeProduct = element
+          this.promotionalOffers.largeProduct = element
         }
         else{
           this.anticipatedGoods.normalProducts.push(element)
+          this.promotionalOffers.normalProducts.push(element)
+          this.promotionalOffers.normalProducts.push(element)
         }
       });
     },
