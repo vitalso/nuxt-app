@@ -259,32 +259,30 @@
         <div class="mt-5">
           <h4>Найбільш очікуванні товари</h4>
           <div class="row">
-            <div class="col-lg-6 col-md-12">
+            <div class="col-lg-6 col-md-12" v-if="Object.keys(anticipatedGoods.largeProduct).length">
               <div class="card product-item large-product mb-2"><a class="add-to-favorite" href="#">
                   <svg>
                     <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
-                  </svg></a><a href="#"><img src="../assets/images/product-14.png" alt="product-image"><span>Ноутбук Apple MacBook Pro 16" M1 Max 1TB 2021 (MK1A3UA/A) Space Gray</span></a>
-                <p class="text-decoration-line-through price-before mb-2">136 999 ₴</p>
-                <p class="current-price mb-0">122 999 ₴</p>
+                  </svg></a><a href="#"><img :src="anticipatedGoods.largeProduct.image_url" :alt="anticipatedGoods.largeProduct.label"><span>{{ anticipatedGoods.largeProduct.title }}</span></a>
+                <p class="text-decoration-line-through price-before mb-2" v-if="anticipatedGoods.largeProduct.price_before">{{ anticipatedGoods.largeProduct.price_before }} ₴</p>
+                <p class="current-price mb-0">{{ anticipatedGoods.largeProduct.price }} ₴</p>
                 <p class="mt-2 mb-0 font-size-13">Очікуєтся</p>
               </div>
             </div>
             <div class="col-lg-6 col-md-12 d-flex d-lg-block justify-content-between">
-              <div class="card product-item mb-4 add-height waited"><a class="add-to-favorite" href="#">
+              <div v-for="good in anticipatedGoods.normalProducts" :key="good.productId" class="card product-item mb-4 add-height waited">
+                <a class="add-to-favorite" href="#">
                   <svg>
                     <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
-                  </svg></a><a href="#">
-                  <div class="product-img"><img src="../assets/images/product-15.png" alt="product-image"></div><span>Бездротовий геймпад PlayStation 5 Dualsense Purple для PS5/PS 5 Digital Edition</span></a>
-                <p class="current-price mb-0 text-dark">2 999 ₴</p>
-                <p class="mt-1 mb-0 font-size-13">Очікуєтся</p>
-              </div>
-              <div class="card product-item mb-4 add-height waited"><a class="add-to-favorite" href="#">
-                  <svg>
-                    <use xlink:href="../assets/images/sprite.svg#icon-favorite"></use>
-                  </svg></a><a href="#">
-                  <div class="product-img"><img src="../assets/images/product-16.png" alt="product-image"></div><span>Планшет Apple iPad mini 2021 Wi-Fi 256 GB Space Gray (MK7T3RK/A)</span></a>
-                <p class="text-decoration-line-through price-before mb-2">25 999 ₴</p>
-                <p class="current-price mb-0">23 999 ₴</p>
+                  </svg>
+                </a>
+                <a href="#">
+                  <div class="product-img">
+                    <img :src="good.image_url" :alt="good.label">
+                  </div>
+                  <span>{{ good.title }}</span>
+                </a>
+                <p class="current-price mb-0 text-dark">{{ good.price }} ₴</p>
                 <p class="mt-1 mb-0 font-size-13">Очікуєтся</p>
               </div>
             </div>
@@ -306,6 +304,10 @@ export default {
     return {
       catalogs: [],     // it contains the products which will be displayed on the main page
       categories: [],   // contains all the categories in the left sidebar
+      anticipatedGoods: {
+        largeProduct: {},
+        normalProducts: []
+      },  // goods in "the most anticipated goods" section
       baseURL: "https://rozetka-web.azurewebsites.net"  //base url for loading images
     }
   },
@@ -321,10 +323,18 @@ export default {
       const formatedResponse = await response.json()
 
       // before displaying a catalog/product, call the api to get image_url
-      formatedResponse.values.forEach(async (element) => {
+      formatedResponse.values.forEach(async (element, index) => {
         let url = await this.getProductImageUrl(element.productId)
         element.image_url = url
         this.catalogs.push(element)   // push products to "catalogs" array only after they have image_url
+
+        // as there are not many products in database, duplicate the products in anticipatedGoods section
+        if (index === 0){
+          this.anticipatedGoods.largeProduct = element
+        }
+        else{
+          this.anticipatedGoods.normalProducts.push(element)
+        }
       });
     },
     async getProductImageUrl(productId) {
