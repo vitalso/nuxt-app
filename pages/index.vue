@@ -102,7 +102,21 @@
       <div class="col-lg-9 col-md-12">
         <!-- Slider-->
         <div class="wrap-slider">
-          <div class="index-slider"><img src="../assets/images/banner.png" alt="banner-image"><img src="../assets/images/banner.png" alt="banner-image"><img src="../assets/images/banner.png" alt="banner-image"></div>
+          <VueSlickCarousel :arrows="true" >
+            <template #prevArrow>
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                  <path fill="black" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+              </svg>
+            </template>
+            <img src="../assets/images/banner.png" alt="banner-image">
+            <img src="../assets/images/banner.png" alt="banner-image">
+            <img src="../assets/images/banner.png" alt="banner-image">
+            <template #nextArrow>
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="black" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+              </svg>
+            </template>
+          </VueSlickCarousel>
         </div><a class="btn btn-primary catalog-link mt-4 d-md-none d-block" href="#">
           <svg>
             <use xlink:href="../assets/images/sprite.svg#icon-catalog"></use>
@@ -266,10 +280,15 @@
 </template>
 
 <script>
+ import VueSlickCarousel from 'vue-slick-carousel'
+  import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+  // optional style for arrows & dots
+  import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+  // import './css/slick-theme.css'
 export default {
   name: 'IndexPage',
   layout: 'custom',
-
+  components: { VueSlickCarousel },
   data() {
     return {
       catalogs: [],     // it contains the products which will be displayed on the main page
