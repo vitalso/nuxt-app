@@ -32,10 +32,10 @@
           <div class="mt-md-0 mt-4 d-none">
             <a class="me-4" href="#"
               ><img
-                src="images/button-google-play-ua.png"
+                src="~/static/images/button-google-play-ua.png"
                 alt="google-play" /></a
             ><a href="#"
-              ><img src="images/button-appstore-ua.png" alt="app-store"
+              ><img src="~/static/images/button-appstore-ua.png" alt="app-store"
             /></a>
           </div>
         </div>
@@ -45,7 +45,7 @@
       <div class="row">
         <div class="col-lg-3 col-md-3">
           <div class="working-hours mb-3">
-            <span class="me-3"> <img src="images/icon-clock.svg" /></span>Графік
+            <span class="me-3"> <img src="~/static/images/icon-clock.svg" /></span>Графік
             роботи Call-центру
           </div>
           <ul
@@ -60,22 +60,22 @@
             "
           >
             <li>
-              <a href="#"> <img src="images/facebook.svg" /></a>
+              <a href="#"> <img src="~/static/images/facebook.svg" /></a>
             </li>
             <li>
-              <a href="#"> <img src="images/twitter.svg" /></a>
+              <a href="#"> <img src="~/static/images/twitter.svg" /></a>
             </li>
             <li>
-              <a href="#"> <img src="images/youtube.svg" /></a>
+              <a href="#"> <img src="~/static/images/youtube.svg" /></a>
             </li>
             <li>
-              <a href="#"><img src="images/instagram.svg" alt="instagram" /></a>
+              <a href="#"><img src="~/static/images/instagram.svg" alt="instagram" /></a>
             </li>
             <li>
-              <a href="#"> <img src="images/viber.svg" /></a>
+              <a href="#"> <img src="~/static/images/viber.svg" /></a>
             </li>
             <li>
-              <a href="#"><img src="images/telegram.svg" alt="telegram" /></a>
+              <a href="#"><img src="~/static/images/telegram.svg" alt="telegram" /></a>
             </li>
           </ul>
         </div>
@@ -124,8 +124,8 @@
         <div class="row">
           <div class="col-lg-2 col-md-2">
             <div class="d-flex justify-content-between align-items-center">
-              <img src="images/mastercard-logo.png" alt="mastercard-logo" /><img
-                src="images/visa-logo.png"
+              <img src="~/static/images/mastercard-logo.png" alt="mastercard-logo" /><img
+                src="~/static/images/visa-logo.png"
                 alt="visa-logo"
               />
             </div>

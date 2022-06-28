@@ -16,7 +16,7 @@
               <span></span><span></span><span></span>
             </button>
             <div class="logo d-none d-md-block">
-              <a href="#"><img src="images/logo.svg" alt="logo" /></a>
+              <a href="#"><img src="~/static/images/logo.svg" alt="logo" /></a>
             </div>
           </div>
           <div
@@ -28,18 +28,18 @@
             "
           >
             <a class="btn btn-primary catalog-link d-none d-lg-block" href="#">
-              <img src="images/icon-catalog.svg" /><span>Каталог</span></a
+              <img src="~/static/images/icon-catalog.svg" /><span>Каталог</span></a
             >
             <div class="header-search">
               <form>
                 <div class="form-group position-relative">
                   <span class="search-icon">
-                    <img src="images/icon-search.svg"
+                    <img src="~/static/images/icon-search.svg"
                   /></span>
                   <input type="text" placeholder="Я шукаю..." />
                   <button class="btn btn-primary" type="submit">Знайти</button
                   ><span class="mic-icon">
-                    <img src="images/icon-mic.svg"
+                    <img src="~/static/images/icon-mic.svg"
                   /></span>
                 </div>
               </form>
@@ -62,12 +62,12 @@
               </li>
               <li class="nav-item mx-4 mb-0 d-none d-md-block">
                 <a class="open-popup" href="#login-popup">
-                  <img src="images/icon-user.svg"
+                  <img src="~/static/images/icon-user.svg"
                 /></a>
               </li>
               <li class="nav-item position-relative mb-0">
                 <a href="#">
-                  <img src="images/icon-basket.svg" /><span
+                  <img src="~/static/images/icon-basket.svg" /><span
                     class="
                       position-absolute
                       top-0
