@@ -19,12 +19,12 @@
         <div class="card card-box mb-3">
           <ul class="nav flex-column side-nav">
             <li v-for="(category, index) in categories" :key="category.portalId" class="nav-item">
-              <a class="nav-link" href="category.html">
+              <nuxt-link class="nav-link" :to="`/ecommerce/${category.portalId}`">
                 <svg>
                   <use :xlink:href="require('@/assets/images/sprite.svg') + `#nav-icon-${index+1}`"></use>
                 </svg>
                 <span>{{ category.title }}</span>
-              </a>
+              </nuxt-link>
             </li>
           </ul>
         </div>
