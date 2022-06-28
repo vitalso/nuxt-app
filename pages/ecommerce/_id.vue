@@ -24,9 +24,6 @@
                 </template>
               </VueSlickCarousel>
             </div>
-            <!-- <div class="wrap-slider">
-              <div class="index-slider"><img src="images/banner.png" alt="banner-image"><img src="images/banner.png" alt="banner-image"><img src="images/banner.png" alt="banner-image"></div>
-            </div> -->
           </div>
           <div class="col-12">
             <!-- Company logos-->
@@ -61,10 +58,7 @@
               <div class="col-xxl-2 col-lg-4 col-md-4 col-sm-6 col-12" v-for="product in popularProducts" :key="product.id">
                 <div class="card product-item add-height mb-2">
                     <a class="add-to-favorite" href="#">
-                      <svg>
-                        <use xlink:href="'~assets/images/icons/icon-favorite.svg'"></use>
-                        <use xlink:href="../../assets/images/icons/icon-favorite.svg"></use>
-                      </svg>
+                      <img src="~assets/images/icons/icon-favorite.svg">
                     </a>
                     <a href="#">
                       <div class="product-img">
@@ -75,38 +69,28 @@
                     <div class="d-flex align-items-center mb-3">
                       <ul class="m-0 p-0 product-rating rating-4 d-flex align-items-center">
                         <li>
-                          <svg>
-                            <use xlink:href="'~assets/images/icons/icon-rating.svg'"></use>
-                          </svg>
+                          <img src="~assets/images/icons/icon-rating.svg">
                         </li>
                         <li>
-                          <svg>
-                            <use xlink:href="'~assets/images/icons/icon-rating.svg'"></use>
-                          </svg>
+                          <img src="~assets/images/icons/icon-rating.svg">
                         </li>
                         <li>
-                          <svg>
-                            <use xlink:href="'~assets/images/icons/icon-rating.svg'"></use>
-                          </svg>
+                          <img src="~assets/images/icons/icon-rating.svg">
                         </li>
                         <li>
-                          <svg>
-                            <use xlink:href="'~assets/images/icons/icon-rating.svg'"></use>
-                          </svg>
+                          <img src="~assets/images/icons/icon-rating.svg">
                         </li>
                         <li>
-                          <svg>
-                            <use xlink:href="'~assets/images/icons/icon-rating.svg'"></use>
-                          </svg>
+                          <img src="~assets/images/icons/icon-rating.svg">
                         </li>
                       </ul><a class="ms-2" href="#">5 відгуків</a>
                     </div>
                     <p class="text-decoration-line-through price-before mb-2" v-if="product.before_price">{{ product.before_price }} ₴</p>
                     <p class="current-price mb-0">{{ product.price }} ₴</p>
-                    <p class="availability mb-0">Є в наявності</p><a class="add-to-cart" href="#">
-                      <svg>
-                        <use xlink:href="@/assets/images/icon-mic.svg"></use>
-                      </svg></a>
+                    <p class="availability mb-0">Є в наявності</p>
+                    <a class="add-to-cart" href="#">
+                      <img src="~assets/images/icons/icon-basket.svg">
+                    </a>
                   </div>
                 </div>
             </div>
@@ -117,45 +101,34 @@
               <div class="col-xxl-2 col-lg-4 col-md-4 col-sm-6 col-12" v-for="product in viewedProducts" :key="product.id">
                 <div class="card product-item add-height mb-2"><a class="add-to-favorite" href="#">
                     <svg>
-                      <!-- <use xlink:href="@/assets/images/sprite.svg#icon-favorite"></use> -->
                       <img src="@/assets/images/icon-mic.svg" />
                     </svg></a><a href="#">
                     <div class="product-img"><img :src="product.image_url" alt="product-image"></div><span>{{ product.title }}</span></a>
                   <div class="d-flex align-items-center mb-3">
                     <ul class="m-0 p-0 product-rating rating-5 d-flex align-items-center">
                       <li>
-                        <svg>
-                          <use xlink:href="'images/sprite.svg#icon-rating'"></use>
-                        </svg>
+                        <img src="~assets/images/icons/icon-rating.svg">
                       </li>
                       <li>
-                        <svg>
-                          <use xlink:href="'images/sprite.svg#icon-rating'"></use>
-                        </svg>
+                        <img src="~assets/images/icons/icon-rating.svg">
                       </li>
                       <li>
-                        <svg>
-                          <use xlink:href="'images/sprite.svg#icon-rating'"></use>
-                        </svg>
+                        <img src="~assets/images/icons/icon-rating.svg">
                       </li>
                       <li>
-                        <svg>
-                          <use xlink:href="'images/sprite.svg#icon-rating'"></use>
-                        </svg>
+                        <img src="~assets/images/icons/icon-rating.svg">
                       </li>
                       <li>
-                        <svg>
-                          <use xlink:href="'images/sprite.svg#icon-rating'"></use>
-                        </svg>
+                        <img src="~assets/images/icons/icon-rating.svg">
                       </li>
                     </ul><a class="ms-2" href="#">327 відгуків</a>
                   </div>
                    <p class="text-decoration-line-through price-before mb-2" v-if="product.before_price">{{ product.before_price }} ₴</p>
                   <p class="current-price mb-0">{{ product.price }} ₴</p>
-                  <p class="availability mb-0">Є в наявності</p><a class="add-to-cart" href="#">
-                    <svg>
-                      <use xlink:href="'images/sprite.svg#icon-basket'"></use>
-                    </svg></a>
+                  <p class="availability mb-0">Є в наявності</p>
+                    <a class="add-to-cart" href="#">
+                      <img src="~assets/images/icons/icon-basket.svg">
+                    </a>
                 </div>
               </div>
             </div>
