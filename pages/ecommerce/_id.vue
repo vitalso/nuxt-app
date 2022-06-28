@@ -92,7 +92,7 @@
                       <img src="~assets/images/icons/icon-basket.svg">
                     </a>
                   </div>
-                </div>
+              </div>
             </div>
           </div>
           <div class="col-12 mt-5">
@@ -177,7 +177,6 @@ export default {
       const response = await fetch('https://rozetka-web.azurewebsites.net/api/v1/portals')
       const formatedResponse = await response.json()
       this.categories = formatedResponse.values
-      console.log("request completed")
 
       // get the title, description of the current category
       for (let i = 0; i < this.categories.length; i++){
@@ -188,7 +187,7 @@ export default {
       }
     },
     async getProducts() {
-      const response = await fetch('https://rozetka-web.azurewebsites.net/api/v1/products')
+      const response = await fetch(`https://rozetka-web.azurewebsites.net/api/v1/catalogs/${this.id}/products`)
       const formatedResponse = await response.json()
 
       // before displaying a catalog/product, call the api to get image_url
@@ -202,7 +201,10 @@ export default {
       this.popularProducts = formatedResponse.values.slice(0,6)
 
       // add a product to "Viewed Products" section
-      this.viewedProducts.push(formatedResponse.values[0])
+      // if condition to prevent viewedProducts from having "undefined"
+      if(formatedResponse.values.length){
+        this.viewedProducts.push(formatedResponse.values[0])
+      }
     },
     async getProductImageUrl(productId) {
       // this function gets the image related to a product
